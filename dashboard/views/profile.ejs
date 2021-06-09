@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Chrollo the Discord Bot</title>
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Chrollo">
+        <meta property="og:title" content="Chrollo the Discord Bot">
+        <meta property="og:description" content="A Powerful Discord Bot with almost every feature a server needs">
+        <meta property="og:image" content="https://chrollo.hisoka17.repl.co/assets/chrollo_logo.jpg">
+        <meta content="#eb347a" data-react-helmet="true" name="theme-color">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="dashboard/public/css/main.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+        <link rel="icon" href="https://Chrollo.hisoka17.repl.co/assets/chrollo.png">
+    </head>
+    <body>
+        <style>
+            .navbar {
+    overflow: hidden;
+    background-color: #eb347a;
+}
+.navbar a {
+    float: left;
+    text-decoration: none;
+    font-family: Varela Round;
+    font-size: 16px;
+    padding: 14px 17px;
+    text-align: center;
+    color: white;
+}
+.navbar a:hover {
+    background-color: #f7c3eb;
+    transition: 0.5s;
+}
+.title {
+    font-size: 40px;
+    position: absolute;
+    top: 20%;
+    right: 45%;
+    color: #eb347a;
+    font-family: Varela Round;
+    font-weight: bold;
+}
+.subtitle {
+    font-size: 17px;
+    position: absolute;
+    top: 27%;
+    right: 42%;
+    color: #eb347a;
+    font-family: Varela Round;
+}
+.chrollo {
+    position: absolute;
+    top: 43%;
+    right: 7%;
+}
+.info {
+    padding: 40px;
+    transition: transform .2s;
+    font-size: 15px;
+    color: #c27894;
+    position: absolute;
+    top: 40%;
+    right: 33%;
+    font-weight: bold;
+    border: solid;
+    background-color: #f5dce6;
+    border-color: #f5dce6;
+    font-family: Varela Round;
+}
+.info:hover {
+    transform: scale(1.1);
+}
+.abouttitle {
+    font-size: 30px;
+    color: #c27894;
+    position: absolute;
+    top: 7%;
+    right: 45%;
+    font-weight: bold;
+}
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 5%;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+        </style>
+        <body>
+        <div class="title">Your Profile</div>
+        <div class="navbar">
+            <a href="/">Chrollo Bot</a>
+            <a href="/commands">Commands</a>
+            <a href="/invite">Invite</a>
+            <a href="/support">Support Server</a>
+            <a href="https://anime-api.hisoka17.repl.co" target="_blank">API</a>
+            <% if (user!==null){ %>
+                <a href="/logout" style="float: right;">Logout</a>
+                <a href="/profile" style="float: right;"><%= user.username %></a>
+                <img src="<%= `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}` %>" style="width: 50px;   border-radius: 50%; float: right;">
+                <div class="dropdown" style="float: right;">
+                    <a class="dropbtn" href="/servers">Servers
+                    <div class="dropdown-content">
+                        <% for (const server of servers){ %>
+                            <a>
+                                <% if (server.icon) { %>
+                                <img style="opacity: 1; border-radius: 50%; float: right; width: 50px;" src="https://cdn.discordapp.com/icons/<%= server.id %>/<%= server.icon %>"> 
+                                <% } else { %>
+                                <img style="opacity: 1; border-radius: 50%; float: right; width: 50px;" src="https://discordapp.com/assets/6debd47ed13483642cf09e832ed0bc1b.png"> 
+                                <% } %>
+                                <a href="<%= `/server/${server.id}` %>"><%= server.name %></a>
+                            </a>
+                            <% } %>
+                        </div>
+                    </a>
+                </a>
+            </div>
+            <% } else { %>
+            <a href="/login" style="float: right;">Login</a>
+            <% } %> 
+        </div>
+        <div class="prof" style="background-color: #eb347a; border: #eb347a; border-radius: 25px; position: absolute; top: 37%; right: 33%; height: 170px; width: 625px;">
+            <img src="<%= `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}` %>" style="border-radius: 50%;">
+            <span style="font-weight: bold; font-family: Varela Round; font-size: 20px; position: absolute; top: 75%; right: 81%; color: #f9f9f9;"><%= user.username %></span>
+            <form action="/set/<%= user.id %>?type=bio" method="POST"><input style="background-color: #2e3136; border: #2e3136; color: azure; position: absolute; top: 12%; right: 35%;" name="bio" placeholder="<%= settings.get(`profile.${user.id}`)?settings.get(`profile.${user.id}`).bio:'Set Your Bio' %>"></input></form>
+            <span style="font-weight: bold; font-family: Varela Round; position: absolute; top: 10%; right: 65%; font-size: 20px;">Your Bio:</span>
+            <span style="font-weight: bold; font-family: Varela Round; position: absolute; top: 31%; right: 55%; font-size: 16px;">Background Image:</span>
+            <form action="/set/<%= user.id %>?type=bg-image" method="POST"><input style="background-color: #2e3136; color: azure; position: absolute; top: 31%; right: 25%;" type="text" id="bg" name="bg_image" placeholder="<%= settings.get(`profile.${user.id}`)&&settings.get(`profile.${user.id}`).bg?settings.get(`profile.${user.id}`).bg:'Set A Background Image' %>"></input></form>
+        </div>
+        <div class="card" style="position: absolute; top: 65%; right: 40%;">
+        <img src="<%= settings.get(`profile.${user.id}`).bg %>" width="400" height="175" style="border-radius: 5%;">
+        <img src="<%= `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}` %>" width="100" style="border-radius: 50%; position: absolute; top: 8%; right: 73%;">
+        <p style="position: absolute; top: 57%; right: 82%; font-family: Varela Round; font-weight: bold; font-size: 17px; color: #f9f9f9;"><%= user.username %></p>
+        <p style="font-family: Varela Round; font-weight: bold; color: azure; font-size: 14px; position: absolute; top: 30%; right: 17%;"><%= settings.get(`profile.${user.id}`)&&settings.get(`profile.${user.id}`).bio?settings.get(`profile.${user.id}`).bio.substring(0, 35):'You have no bio set' %></p>
+        </div>
+        </script>
+        </body>
