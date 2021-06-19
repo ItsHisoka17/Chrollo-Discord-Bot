@@ -3,7 +3,7 @@ const fetch = require('node-superfetch')
 const db = require('quick.db')
 const { TOPGG_AUTH_TOKEN } = require('../../config.json');
 const BaseCommand = require('../../structures/BaseCommand');
-require('../../structures/inreply')
+
 
 module.exports = class Blowjob extends BaseCommand{
     constructor(client){

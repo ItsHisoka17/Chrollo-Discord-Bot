@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const Utils = require('../utils/utils')
 const defPrefix = 'mk?'
-require('../structures/inreply')
+require('../structures/Message')
 
 module.exports = {
     event: 'message',

@@ -14,8 +14,6 @@ class Roast extends BaseCommand {
 async execute(message, client, args) {
     this.globalMessage(message);
     let mention = message.mentions.members.first()
-    let user = this.parseMention(args[0])
-    console.log(user)
     if (!mention){
         message.channel.send(new MessageEmbed() .setDescription('Come on! You can\'t roast yourself') .setImage('https://media1.tenor.com/images/a8e603613db31c083c4127ab456311fa/tenor.gif?itemid=5737126') .setColor(require('../../utils/utils').getRandom(['0xfff8f7', '#eba0c4'])))
         return;

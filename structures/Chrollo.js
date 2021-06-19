@@ -1,22 +1,23 @@
 const { Client, Collection, MessageEmbed, Intents } = require("discord.js");
 const path = require('path')
+const Base = require('./Base')
+const { joinDir } = require('../utils/utils')
+const fs = require('fs');
 const config = require('../config.json')
 const { Player } = require('discord-player')
 const glob = require('glob')
 const Command = require('./BaseCommand')
-const intents = new Intents();
-intents.add(
-'GUILD_PRESENCES',
-'GUILD_MEMBERS',
-'GUILDS', 
-'GUILD_VOICE_STATES',
-'GUILD_MESSAGES',
-'GUILD_MESSAGE_REACTIONS',
-);
+let intentsArr = ['GUILD_PRESENCES', 'GUILD_MEMBERS', 'GUILDS', 'GUILD_VOICE_STATES', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS']
+let intents = new Intents();
+intents.add(...intentsArr);
+
 class Chrollo extends Client{
-    constructor(options = {ws: {intents: intents}}){
+    constructor(options = {ws: {intents}}){
         super(options)
-        const player = new Player(this, {leaveOnEnd: false, leaveOnEmptyCooldown: 120000})
+        options.ws = {}["intents"] = intents;
+        new Base();
+        const player = new Player(this, {leaveOnEnd: false, leaveOnEmptyCooldown: 120000});
+        require('discord-buttons')(this);
         this.emotes = {x: '❌',check: '✅'};
         this.commands = new Collection();
         this.events = new Collection();
@@ -44,8 +45,25 @@ class Chrollo extends Client{
             }
         })
     }
-
+    loadEvents(){
+        fs.readdir('events', (err, files) => {
+            if (err) return console.error(err); 
+            files.forEach(file => {
+                const eventFunction = require(joinDir('..', 'events', file));
+                if (eventFunction.disabled) return; 
+                const event = eventFunction.event || file.split('.')[0];
+                const emitter = (typeof eventFunction.emitter === 'string' ? this[eventFunction.emitter] : eventFunction.emitter) || this;
+                const once = eventFunction.once; 
+                try {
+                    emitter[once ? 'once' : 'on'](event, (...args) => eventFunction.run(this, ...args));
+                } catch (error) {
+                    console.error(error.stack);
+                }
+            });
+        });
+    }
     init(){
+        this.loadEvents()
         this.loadCommands()
         this.login(config.token)
     }

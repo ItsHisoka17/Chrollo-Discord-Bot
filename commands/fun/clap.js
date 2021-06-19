@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js")
 const BaseCommand = require('../../structures/BaseCommand')
 const UtilFiles = require("../../utils/utils")
-require('../../structures/inreply')
+
 
 class Clap extends BaseCommand {
     constructor(client){

@@ -3,7 +3,7 @@ const fetch = require('node-superfetch')
 const Anime_Images = require('anime-images-api')
 const { TOPGG_AUTH_TOKEN } = require('../../config.json');
 const BaseCommand = require('../../structures/BaseCommand');
-require('../../structures/inreply')
+
 
 module.exports = class Boobs extends BaseCommand {
     constructor(client){

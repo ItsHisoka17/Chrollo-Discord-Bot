@@ -21,7 +21,7 @@ class BaseCommand {
         return this.message.channel.send(message)
     }
     inlineReply(content){
-        require('./inreply')
+        require('./Message')
         return this.message.inreply(content)
     }
     get embedColor(){

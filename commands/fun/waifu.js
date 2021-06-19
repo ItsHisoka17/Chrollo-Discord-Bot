@@ -1,7 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const { get } = require('node-superfetch');
 const BaseCommand = require('../../structures/BaseCommand');
-require('../../structures/inreply')
+
 
 class Waifu extends BaseCommand {
     constructor(client){

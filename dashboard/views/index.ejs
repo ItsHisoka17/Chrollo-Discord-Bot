@@ -18,7 +18,7 @@
     </head>
     <body>
         <style>
-            .navbar {
+.navbar {
     overflow: hidden;
     background-color: #eb347a;
 }
@@ -117,6 +117,9 @@
   display: block;
 }
 .cookie-banner {
+  font-weight: bold;
+  font-family: Varela Round;
+  background-color: #eb347a;
   position: fixed;
   bottom: 40px;
   left: 10%;
@@ -126,7 +129,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #eee;
   border-radius: 5px;
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
@@ -138,6 +140,7 @@
   border-radius: 2px;
   cursor: pointer;
 }
+
         </style>
         <div class="dark-mode"></div>
         <div class="title">Chrollo The Discord Bot</div>
@@ -193,28 +196,12 @@
             <button class="close">&times;</button>
             </div>
         <script>
-            function toggleDark(){
-    let currentCol = localStorage.getItem('color');
-    if (currentCol === 'dark'){
-        document.body.style.backgroundColor = 'white'
-        localStorage.setItem('color', 'white')
-    } else {
-        document.body.style.backgroundColor = 'dark'
-        localStorage.setItem('color', 'dark')
-    }
-    if (!currentCol){
-        document.body.style.backgroundColor = 'dark'
-        localStorage.setItem('color', 'dark')
-    }
-    }
-        </script>
-        <script>
             if (localStorage.getItem("cookieSeen") != "shown") {
   $(".cookie-banner").delay(2000).fadeIn();
-  localStorage.setItem("cookieSeen","shown")
 };
 $(".close").click(function() {
   $(".cookie-banner").fadeOut();
+  localStorage.setItem('cookieSeen', 'shown')
 })
         </script>
     </body>

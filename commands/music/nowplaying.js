@@ -50,8 +50,9 @@ async execute(message, client, args) {
             new Discord.MessageEmbed()
             .setDescription(`**Paused**\nCurrently Playing: [${track.title}](${track.url})\nRequested By: ${track.requestedBy}\nDuration: ${track.duration}\nVolume: ${client.player.getQueue(message).volume}\n${client.player.createProgressBar(message, { timecodes: true })}\nLooped: ${client.player.getQueue(message).repeatMode?client.emotes.check:client.emotes.x}`)
             .setColor(require('../../utils/utils').getRandom(['0xfff8f7', '#eba0c4']))
-            .setThumbnail(track.thumbnail))
+            .setThumbnail(track.thumbnail)
             .setFooter(`Looped: ${client.player.getQueue(message).repeatMode?client.emotes.check:client.emotes.x}`)
+            )
         }
         if (reacted.emoji.name == '▶️'){
             const userReactionss = embedd.reactions.cache.filter(reaction => reaction.users.cache.filter(u => u.id !== client.user.id).has(user.id));

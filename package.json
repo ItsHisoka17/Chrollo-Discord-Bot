@@ -4,7 +4,8 @@
   "description": "",
   "main": "client.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node ."
   },
   "author": "Hisoka",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "common-tags": "^1.8.0",
     "custom-translate": "^2.2.8",
     "debug": "^4.3.1",
+    "discord-buttons": "^3.2.1",
     "discord-player": "^3.2.1",
     "discord.js": "^12.5.3",
     "discordjs-facts": "^1.0.1",

@@ -24,5 +24,10 @@ class Message extends Structures.get("Message") {
             .post({ data, files })
             .then(d => this.client.actions.MessageCreate.handle(d).message);
     }
+
+    async send(content, options){
+        return this.channel.send(content, options)
+    }
 }
-Structures.extend("Message", () => Message);
+
+module.exports = Message;

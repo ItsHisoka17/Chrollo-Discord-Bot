@@ -2,7 +2,7 @@ const { MessageEmbed } = require('discord.js');
 const fetch = require('node-superfetch')
 const { TOPGG_AUTH_TOKEN } = require('../../config.json');
 const BaseCommand = require('../../structures/BaseCommand');
-require('../../structures/inreply')
+
 
 module.exports = class Anal extends BaseCommand {
     constructor(client){

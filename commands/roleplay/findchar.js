@@ -2,7 +2,7 @@ const { MessageEmbed } = require('discord.js');
 const Command = require('../../structures/BaseCommand')
 const fetch = require('node-superfetch')
 const { getRandom, getRandomInt } = require('../../utils/utils')
-require('../../structures/inreply')
+
 
 class FindChar extends Command{
     constructor(client){

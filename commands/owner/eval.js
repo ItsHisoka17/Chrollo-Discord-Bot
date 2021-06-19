@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const {MessageEmbed, APIMessage} = require('discord.js');
 const BaseCommand = require('../../structures/BaseCommand')
 const { generateID, shorten } = require('../../utils/utils')
 
@@ -13,17 +13,17 @@ class Eval extends BaseCommand {
 }
 async execute(message, client, args) {
     if (!args[0]){
-            const invalArgs = new Discord.MessageEmbed() .setColor(require('../../utils/utils').getRandom(['0xfff8f7', '#eba0c4'])) .setDescription('```Invalid Args: Nothing Provided to Evaluate```')
+            const invalArgs = new MessageEmbed() .setColor(require('../../utils/utils').getRandom(['0xfff8f7', '#eba0c4'])) .setDescription('```Invalid Args: Nothing Provided to Evaluate```')
             message.channel.send(invalArgs)
             return;
     }
-    if (message.content.includes('token')) return message.channel.send(new Discord.MessageEmbed() .setDescription(`Your token is: FAKETOKEN${generateID(30, {numbersOnly: false}).toUpperCase()}`) .setColor(require('../../utils/utils').getRandom(['0xfff8f7', '#eba0c4'])));
-    let toEval = args.join(' ');
+    if (message.content.includes('token')) return message.channel.send(new MessageEmbed() .setDescription(`Your token is: FAKETOKEN${generateID(30, {numbersOnly: false}).toUpperCase()}`) .setColor(require('../../utils/utils').getRandom(['0xfff8f7', '#eba0c4'])));
+    let toEval = args.join(' ').replace(/(```|```js|js)/ig, '')
     try{
     let evaled = eval(toEval)
     if (typeof evaled !== 'string')
     evaled = require('util').inspect(evaled);
-    const evaledembed = new Discord.MessageEmbed()
+    const evaledembed = new MessageEmbed()
     .setColor(require('../../utils/utils').getRandom(['0xfff8f7', '#eba0c4']))
     .addFields({
         name: 'Input:',
@@ -40,7 +40,7 @@ async execute(message, client, args) {
     )
     message.channel.send(evaledembed)
 } catch (err) {
-    const errorembed = new Discord.MessageEmbed()
+    const errorembed = new MessageEmbed()
     .setColor(require('../../utils/utils').getRandom(['0xfff8f7', '#eba0c4']))
     .addFields({
         name: 'Input:',
